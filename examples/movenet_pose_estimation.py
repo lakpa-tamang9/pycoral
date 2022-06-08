@@ -141,7 +141,7 @@ def main():
     #         fill=(255, 0, 0),
     #     )
     # img.save(args.output)
-    # print("Done. Results saved at", args.output)
+    print("Done. Results saved at", args.output)
 
 
 if __name__ == "__main__":
