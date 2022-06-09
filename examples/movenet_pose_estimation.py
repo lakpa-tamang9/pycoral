@@ -103,6 +103,7 @@ def main():
     cap = cv2.VideoCapture(0)
     while cap.isOpened():
         ret, frame = cap.read()
+        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         if ret:
             print("Successful camera read")
 
