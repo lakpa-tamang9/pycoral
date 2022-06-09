@@ -102,7 +102,7 @@ def main():
     while cap.isOpened():
         ret, frame = cap.read()
         new_frame_time = time.time()
-        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
 
         # Reshape image
         img = frame.copy()
