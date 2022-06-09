@@ -104,18 +104,15 @@ def main():
     while cap.isOpened():
         ret, frame = cap.read()
         frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-        if ret:
-            print("Successful camera read")
 
         # Reshape image
         img = frame.copy()
-        # img = tf.image.resize_with_pad(np.expand_dims(img, axis=0), 192, 192)
-        # input_image = tf.cast(img, dtype=tf.float32)
         resized_img = cv2.resize(img, (192, 192))
         common.set_input(interpreter, resized_img)
         output_details = interpreter.get_output_details()
         interpreter.invoke()
         keypoints_with_scores = interpreter.get_tensor(output_details[0]["index"])
+        print(keypoints_with_scores)
 
         pose = common.output_tensor(interpreter, 0).copy().reshape(_NUM_KEYPOINTS, 3)
 
