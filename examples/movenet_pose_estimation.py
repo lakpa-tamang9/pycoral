@@ -39,6 +39,7 @@ from pycoral.adapters import common
 from pycoral.utils.edgetpu import make_interpreter
 import cv2
 import numpy as np
+import time
 
 
 _NUM_KEYPOINTS = 17
@@ -101,8 +102,11 @@ def main():
     interpreter.allocate_tensors()
 
     cap = cv2.VideoCapture(0)
+    prev_frame_time = 0
+    new_frame_time = 0
     while cap.isOpened():
         ret, frame = cap.read()
+        new_frame_time = time.time()
         frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
         # Reshape image
@@ -120,7 +124,19 @@ def main():
         draw_connections(frame, keypoints_with_scores, EDGES, 0.4)
         draw_keypoints(frame, keypoints_with_scores, 0.4)
 
-        cv2.imshow("MoveNet Lightning", frame)
+        frames_per_sec = 1.0 / (new_frame_time - prev_frame_time)
+        prev_frame_time = new_frame_time
+        cv2.putText(
+            frame,
+            str("FPS: {:.0f}".format(frames_per_sec)),
+            (7, 50),
+            cv2.FONT_HERSHEY_COMPLEX_SMALL,
+            2,
+            (0, 0, 255),
+            2,
+        )
+
+        cv2.imshow("Recognition", frame)
 
         if cv2.waitKey(10) & 0xFF == ord("q"):
             break
