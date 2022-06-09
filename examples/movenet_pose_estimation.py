@@ -39,7 +39,7 @@ from pycoral.adapters import common
 from pycoral.utils.edgetpu import make_interpreter
 import cv2
 import numpy as np
-import tensorflow as tf
+
 
 _NUM_KEYPOINTS = 17
 
