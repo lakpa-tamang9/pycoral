@@ -103,6 +103,8 @@ def main():
     cap = cv2.VideoCapture(0)
     while cap.isOpened():
         ret, frame = cap.read()
+        if ret:
+            print("Successful camera read")
 
         # Reshape image
         img = frame.copy()
