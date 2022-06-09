@@ -112,13 +112,13 @@ def main():
         output_details = interpreter.get_output_details()
         interpreter.invoke()
         keypoints_with_scores = interpreter.get_tensor(output_details[0]["index"])
-        print(keypoints_with_scores)
+        # print(keypoints_with_scores)
 
         pose = common.output_tensor(interpreter, 0).copy().reshape(_NUM_KEYPOINTS, 3)
 
         # Rendering
-        draw_connections(img, keypoints_with_scores, EDGES, 0.4)
-        draw_keypoints(img, keypoints_with_scores, 0.4)
+        draw_connections(frame, keypoints_with_scores, EDGES, 0.4)
+        draw_keypoints(frame, keypoints_with_scores, 0.4)
 
         cv2.imshow("MoveNet Lightning", frame)
 
