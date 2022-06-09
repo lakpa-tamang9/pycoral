@@ -115,7 +115,7 @@ def main():
         landmark_keypoints = keypoints_with_scores[0][0]
         print(len(landmark_keypoints))
         print(f"Nose keypoints: {landmark_keypoints[0]}")
-        print(f"Left eye keypoints: {landmark_keypoints[2]}")
+        print(f"Left eye keypoints x coord: {landmark_keypoints[2][0]}")
 
         pose = common.output_tensor(interpreter, 0).copy().reshape(_NUM_KEYPOINTS, 3)
 
