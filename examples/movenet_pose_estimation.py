@@ -108,8 +108,10 @@ def main():
 
         # Reshape image
         img = frame.copy()
-        # resized_img = img.resize(common.input_size(interpreter), Image.ANTIALIAS)
-        common.set_input(interpreter, img)
+        # img = tf.image.resize_with_pad(np.expand_dims(img, axis=0), 192, 192)
+        # input_image = tf.cast(img, dtype=tf.float32)
+        resized_img = img.resize((192, 192), Image.ANTIALIAS)
+        common.set_input(interpreter, resized_img)
         output_details = interpreter.get_output_details()
         interpreter.invoke()
         keypoints_with_scores = interpreter.get_tensor(output_details[0]["index"])
