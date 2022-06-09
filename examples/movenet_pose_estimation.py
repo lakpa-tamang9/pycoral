@@ -111,7 +111,7 @@ def main():
         output_details = interpreter.get_output_details()
         interpreter.invoke()
         keypoints_with_scores = interpreter.get_tensor(output_details[0]["index"])
-        print(keypoints_with_scores)
+        print(f"The index for noise is {keypoints_with_scores[0]}")
 
         pose = common.output_tensor(interpreter, 0).copy().reshape(_NUM_KEYPOINTS, 3)
 
